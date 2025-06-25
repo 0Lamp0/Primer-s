@@ -106,7 +106,7 @@ int main() {
        // cout <<"#Позже скрыть  |" << p.Eval() << endl; // Дебаг для ответов
 
         while (true) {
-            cout << vopros<<endl;
+            cout << "Вопрос номер " << i+1 << ": \n\n" <<"  " << vopros << endl << endl;
             double userAnswer;
             cout << "Ваш ответ: \n>";
             cin >> userAnswer;
