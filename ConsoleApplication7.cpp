@@ -2,7 +2,7 @@
 #include <string>       
 #include <ctime>        
 #include <cmath>        
-#include <muParser.h>   
+#include <muParser.h>   <----
 
 using namespace std;
 
@@ -19,8 +19,9 @@ char ops() {
 
 // Настройка кол-ва опеоаций 
 int min_terms = 2; 
-int max_terms = 4; 
+int max_terms = 5; 
 
+//Вставка 
 string AddOneBracket(string expr) {
 
     if (rand() % 10 >3) // 70% случаев — не вставляем скобки
@@ -86,17 +87,41 @@ string GenExpr() {
 int main() {
     setlocale (LC_ALL, "ru");
     srand(time(0));
+    mu::Parser p;
 
-    for (int i=0; i < 10;i++)
-    cout << GenExpr() <<endl;
-    /*int numExamples;
+    //for (int i=0; i < 10;i++)
+    //cout << GenExpr() <<endl;
+    
+    int numExamples;
     
 
-    cout << "Сколько примеров хотите решить? ";
-    cin >> numExamples; 
-    cout << "\n-------------------------------------------------\n- Используй (.) а не (,)\n- Точность выражения 6 символов после запятой\n------------------------------------------------";
+    cout << "\n------------------------------------------------\n- Используй (.) а не (,)\t\t\t|\n- Точность: выражения 2 символов после запятой\t|\n------------------------------------------------"<<endl;
+    cout << "Сколько примеров хотите решить? \n>";
+    cin >> numExamples;
+    for (int i = 0;i < numExamples;i++)
+    {
+        string vopros = GenExpr();
+        p.SetExpr(vopros);
+        double correctAnswer = p.Eval();
+       // cout <<"#Позже скрыть  |" << p.Eval() << endl; // Дебаг для ответов
 
+        while (true) {
+            cout << vopros<<endl;
+            double userAnswer;
+            cout << "Ваш ответ: \n>";
+            cin >> userAnswer;
 
-    cout << "Все примеры решены. Молодец!" << endl;*/
+            if (abs(userAnswer - correctAnswer) < 1e-2) {
+                cout << "Правильно!\n";
+                break;
+            }
+            else {
+                cout << "Неправильно. Попробуйте ещё раз.\n";
+            }
+        }
+        
+    }
+    cout << "Все примеры решены. Молодец!" << endl;
+
     return 0;
 }
